@@ -1,0 +1,19 @@
+#loginpage {
+    width: 50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: auto;
+}
+#footer{
+    width: 100%;
+    padding: 10px;
+    /* background-color: lightblue; */
+}
+.text-end {
+    /* text-align: right !important;     */
+    margin-right: 670px;
+  }
+  
+  .input-box {
+    padding: 30px;
+  }
