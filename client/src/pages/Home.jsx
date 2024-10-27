@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useEffect,useState } from "react";
 import axios from "axios";
+import {message} from 'antd'
 import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [email,setEmail]=useState("");
@@ -21,11 +22,13 @@ const Home = () => {
     let api="http://localhost:8080/user/userlogin";
     axios.post(api,{email:email,password:password}).then((res)=>{
       console.log(res.data);
+      message.success("You are Successfully Login!")
 
 
       localStorage.setItem("auth-token",res.data.token)
       localStorage.setItem("username",res.data.user.username);
 
+    
       navigate("/dashboard");
     })
   }

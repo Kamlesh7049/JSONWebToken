@@ -12,6 +12,7 @@ const Dashboard=()=>{
 
     const logout=()=>{
         localStorage.clear();
+        window.confirm("do you want to logout");
         navigate("/home");
     };
     return(

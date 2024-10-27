@@ -2,6 +2,17 @@ const UserModel = require("../models/userModels");
 const bcrypt = require("bcrypt");
 const jwt=require("jsonwebtoken");
 
+
+const checkValidUser=async(req,res)=>{
+    const token =req.header("x-auth-token");
+    if(!token)return res.json(false);
+    const verified=jwt.verify(token,"raj1234")
+    if(!verified)return res.json(false);
+    const user=await UserModel.findById(verified.id);
+    if(!user)return res.json(false);
+    return res.json;
+}
+
 const userSave = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -15,15 +26,13 @@ const userSave = async (req, res) => {
             password: hashedPassword,
         });
 
-        console.log(name, email, password);
+        console.log(name, email, password);     
         res.status(201).send({ msg: "Registration Successful" });
     } catch (error) {
         console.error("Registration error:", error);
         res.status(500).send({ msg: "Registration Failed" });
     }
 };
-
-
 
 const userLogin= async(req,res)=>{
     const {email,password}=req.body;
@@ -62,5 +71,6 @@ const userLogin= async(req,res)=>{
 
 module.exports = {
     userSave,
-    userLogin
+    userLogin,
+    checkValidUser
 };
